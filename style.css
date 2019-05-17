@@ -14,11 +14,11 @@ header {
     padding: 25px;
 }
 
-section{
-background: #455d7a;
+section {
+    background: #455d7a;
 }
 
-footer{
+footer {
     position: absolute;
     width: 100%;
     justify-content: center;
@@ -28,4 +28,14 @@ footer{
     grid-template-rows: 2, 50px;
     background: #233142;
     bottom: 0;
+    color: #eee;
+    text-decoration: none;
+}
+
+footer a {
+    color: #eee;
+}
+
+footer a:visited {
+    color: #eee;
 }
