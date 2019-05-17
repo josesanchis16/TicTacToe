@@ -18,11 +18,43 @@ header {
     padding: 25px;
 }
 
-section {}
+section {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+#boardContent {
+    margin-top: 10%;
+    width: 300px;
+    height: 300px;
+    background: #233142;
+    border: 4px solid #eee;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    overflow: hidden;
+}
+
+#boardContent div {
+    width: 100px;
+    height: 100px;
+    background: #233142;
+    border: 2px solid #eee;
+}
+
+#boardContent div:hover {
+    background: #172635;
+}
 
 footer {
     position: absolute;
     width: 100%;
+    bottom: 0;
     justify-content: center;
     align-items: center;
     display: grid;
