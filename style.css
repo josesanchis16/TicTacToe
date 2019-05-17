@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+body {
+    background: #455d7a;
+}
+
 header {
     width: 100%;
     background: #233142;
@@ -14,9 +18,7 @@ header {
     padding: 25px;
 }
 
-section {
-    background: #455d7a;
-}
+section {}
 
 footer {
     position: absolute;
@@ -30,6 +32,26 @@ footer {
     bottom: 0;
     color: #eee;
     text-decoration: none;
+}
+
+#starPuntuation {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+#starPuntuation i {
+    margin: 10px 5px;
+}
+
+#socialNetworks {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+#socialNetworks a {
+    margin: 10px;
 }
 
 footer a {
