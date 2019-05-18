@@ -44,6 +44,20 @@ section div:nth-child(2) div {
     padding-right: 50px;
 }
 
+section div:nth-child(2) div:nth-child(1) i{
+    padding: 20px;
+    background: #233142;
+    color: #eee;
+    border: 4px solid #eee;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+section div:nth-child(2) div:nth-child(1) i:hover{
+    background: #172635;
+    transition: 0.2s;
+}
+
 section>div>p {
     font-size: 1.2em;
 }
@@ -73,10 +87,12 @@ section div:nth-child(2) {
     height: 100px;
     background: #233142;
     border: 2px solid #eee;
+    transition: 0.5s;
 }
 
 #board div:hover {
     background: #172635;
+    transition: 0.2s;
 }
 
 #board div i {
