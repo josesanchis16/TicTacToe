@@ -1,3 +1,10 @@
+//Tiempo minimo que la IA espera para la tirada
+const TIMEPO_MINIMO_ESPERA_IA = 500;
+
+//Contador para saber las celtas ocupadas
+let celdasLlenas = 0;
+let arrCeldas = [];
+
 class Boton {
     constructor(btn) {
         this.btn = btn;
@@ -31,6 +38,13 @@ const btnPos9 = new Boton(document.getElementById('pos9'));
 let turno = Math.round(Math.random() * 1 + 1);
 //1 jugador
 //2 IA
+
+if (turno === 1) {
+    console.log('Turno del Jugador');
+} else {
+    console.log('Turno de la IA');
+    turnoIA();
+}
 
 btnPos1.getBtn().onclick = function () {
     dibujarCruz(btnPos1);
@@ -76,10 +90,27 @@ function dibujarCruz(pos) {
             pos.getBtn().appendChild(element);
             pos.setPressed(true);
             turno = 2;
+            celdasLlenas++;
+            console.log('Turno de la IA');
+            turnoIA();
         }
     } else {
         console.log('El boton seleccionado ya esta presionado');
     }
+}
+
+//######################   I.A. ###################\\
+
+function sleep(milsec) {
+    return new Promise(resolve => setTimeout(resolve, milsec));
+}
+
+async function turnoIA() {
+    console.log('Me toca');
+
+    let milsec = Math.random() * 1000 + TIMEPO_MINIMO_ESPERA_IA;
+    await sleep(milsec);
+    dibujarCirculo(btnPos1);
 }
 
 function dibujarCirculo(pos) {
@@ -90,6 +121,8 @@ function dibujarCirculo(pos) {
             pos.getBtn().appendChild(element);
             pos.setPressed(true);
             turno = 1;
+            celdasLlenas++;
+            console.log('Turno del Jugador');
         }
     } else {
         console.log('El boton seleccionado ya esta presionado');
