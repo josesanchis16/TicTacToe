@@ -27,6 +27,11 @@ const btnPos7 = new Boton(document.getElementById('pos7'));
 const btnPos8 = new Boton(document.getElementById('pos8'));
 const btnPos9 = new Boton(document.getElementById('pos9'));
 
+//Miramos a ver quien es el que saca primero
+let turno = Math.round(Math.random() * 1 + 1);
+//1 jugador
+//2 IA
+
 btnPos1.getBtn().onclick = function () {
     dibujarCruz(btnPos1);
 }
@@ -65,10 +70,27 @@ btnPos9.getBtn().onclick = function () {
 
 function dibujarCruz(pos) {
     if (!pos.isPressed()) {
-        let element = document.createElement('i');
-        element.setAttribute('class', 'fas fa-times fa-4x');
-        pos.getBtn().appendChild(element);
-        pos.setPressed(true);
+        if (turno === 1) {
+            let element = document.createElement('i');
+            element.setAttribute('class', 'fas fa-times fa-4x');
+            pos.getBtn().appendChild(element);
+            pos.setPressed(true);
+            turno = 2;
+        }
+    } else {
+        console.log('El boton seleccionado ya esta presionado');
+    }
+}
+
+function dibujarCirculo(pos) {
+    if (!pos.isPressed()) {
+        if (turno === 2) {
+            let element = document.createElement('i');
+            element.setAttribute('class', 'fas fa-circle fa-4x');
+            pos.getBtn().appendChild(element);
+            pos.setPressed(true);
+            turno = 1;
+        }
     } else {
         console.log('El boton seleccionado ya esta presionado');
     }
