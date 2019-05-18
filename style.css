@@ -43,7 +43,7 @@ section > div> p{
     font-size: 1.2em;
 }
 
-#boardContent {
+#board {
     width: 300px;
     height: 300px;
     background: #233142;
@@ -57,18 +57,18 @@ section > div> p{
     overflow: hidden;
 }
 
-#boardContent div {
+#board div {
     width: 100px;
     height: 100px;
     background: #233142;
     border: 2px solid #eee;
 }
 
-#boardContent div:hover {
+#board div:hover {
     background: #172635;
 }
 
-#boardContent div i {
+#board div i {
     justify-content: center;
     align-items: center;;
     display: flex;
