@@ -59,6 +59,13 @@ section {
     background: #172635;
 }
 
+#boardContent div i {
+    justify-content: center;
+    align-items: center;;
+    display: flex;
+    height: 100%;
+}
+
 footer {
     width: 100%;
     justify-content: center;
