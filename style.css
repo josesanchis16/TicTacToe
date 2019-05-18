@@ -35,12 +35,23 @@ section {
     flex-direction: column;
 }
 
-section > div {
+section div:nth-child(1) {
     padding-bottom: 18px; 
+}
+
+section div:nth-child(2) div {
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 section > div> p{
     font-size: 1.2em;
+}
+
+section div:nth-child(2){
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 #board {
