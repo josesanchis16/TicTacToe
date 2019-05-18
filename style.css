@@ -3,6 +3,8 @@
     padding: 0;
     font-size: 1em;
     box-sizing: border-box;
+    color: #eee;
+    cursor: default;
 }
 
 body {
@@ -22,9 +24,9 @@ header {
     width: 100%;
     height: 100px;
     background: #233142;
-    color: #eee;
     font-size: 2.5em;
     text-align: center;
+    z-index: 1;
 }
 
 section {
@@ -32,40 +34,41 @@ section {
     justify-content: center;
     align-items: center;
     display: flex;
-    flex-direction: column;
 }
 
-section div:nth-child(1) {
-    padding-bottom: 18px;
-}
-
-section div:nth-child(2) div {
-    padding-left: 50px;
-    padding-right: 50px;
-}
-
-section div:nth-child(2) div:nth-child(1) i{
-    padding: 20px;
+section > div:not(#divBoard){
+    padding: 10px;
     background: #233142;
-    color: #eee;
-    border: 4px solid #eee;
-    border-radius: 50%;
-    transition: 0.2s;
-}
-
-section div:nth-child(2) div:nth-child(1) i:hover{
-    background: #172635;
-    transition: 0.2s;
-}
-
-section>div>p {
-    font-size: 1.2em;
-}
-
-section div:nth-child(2) {
     justify-content: center;
     align-items: center;
     display: flex;
+    border: 4px solid #eee;
+    border-radius: 5px;
+}
+
+section > div:not(#divBoard):first-child{
+    border-radius: 50%;
+    padding: 15px;
+}
+
+section>div:nth-child(2) {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+section>div:nth-child(2)>div:first-child {
+    padding-bottom: 18px;
+}
+
+section>div:nth-child(2) p {
+    font-size: 1.2em;
+}
+
+section #divBoard {
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 #board {
@@ -98,9 +101,56 @@ section div:nth-child(2) {
 #board div i {
     justify-content: center;
     align-items: center;
-    ;
     display: flex;
     height: 100%;
+}
+
+section >div:nth-child(3){
+    flex-direction: column;
+    font-size: 1.2em;
+}
+
+#tituloDificultad{
+    position: relative;
+}
+
+#tituloDificultad::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    top: 20px;
+    left: 0;
+    background: #eee;
+}
+
+#btnFacil {
+    margin-top: 10px;
+}
+
+section > div:nth-child(3) p:not(#tituloDificultad){
+    padding: 3px 0;
+    position: relative;
+}
+
+section > div:nth-child(3) p:not(#tituloDificultad):hover::after{
+    position: absolute;
+    content: "";
+    top: 13px;
+    left: -20px;
+    width: 10px;
+    height: 3px;
+    background: #eee;
+}
+
+.difuciltadIsSelected::after{
+    position: absolute;
+    content: "";
+    top: 13px;
+    left: -20px;
+    width: 10px;
+    height: 3px;
+    background: #eee;
 }
 
 footer {
@@ -112,8 +162,8 @@ footer {
     grid-template-rows: 2, 50px;
     background: #233142;
     bottom: 0;
-    color: #eee;
     text-decoration: none;
+    z-index: 1;
 }
 
 #starPuntuation {
@@ -134,14 +184,6 @@ footer {
 
 #socialNetworks a {
     margin: 10px;
-}
-
-footer a {
-    color: #eee;
-}
-
-footer a:visited {
-    color: #eee;
 }
 
 .selectedStar {
