@@ -32,6 +32,15 @@ section {
     justify-content: center;
     align-items: center;
     display: flex;
+    flex-direction: column;
+}
+
+section > div {
+    padding-bottom: 18px; 
+}
+
+section > div> p{
+    font-size: 1.2em;
 }
 
 #boardContent {

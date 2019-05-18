@@ -30,6 +30,8 @@ const btnPos7 = new Boton(document.getElementById('pos7'));
 const btnPos8 = new Boton(document.getElementById('pos8'));
 const btnPos9 = new Boton(document.getElementById('pos9'));
 
+const turnoText = document.getElementById('turnoText');
+
 //Miramos a ver quien es el que saca primero
 let turno = Math.round(Math.random() * 1 + 1);
 //1 jugador
@@ -102,6 +104,7 @@ function dibujarCruz(pos) {
             setCeldaSelected();
             turno = 2;
             celdasLlenas++;
+            turnoText.innerText = "Turno de la IA";
             console.log('--- Turno de la IA ---');
             turnoIA();
         }
@@ -130,6 +133,7 @@ function dibujarCirculo(pos) {
             setCeldaSelected(pos.getBtn());
             turno = 1;
             celdasLlenas++;
+            turnoText.innerText = "Turno del jugador";
             console.log('--- Turno del Jugador ---');
         }
     } else {
