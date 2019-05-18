@@ -44,6 +44,12 @@ const btnPos8 = new Boton(document.getElementById('pos8'), 8);
 const btnPos9 = new Boton(document.getElementById('pos9'), 9);
 
 const turnoText = document.getElementById('turnoText');
+
+const btnFacil = document.getElementById('btnFacil');
+const btnMedia = document.getElementById('btnMedia');
+const btnDificil = document.getElementById('btnDificil');
+
+//######### Variables ############
 let partidaTerminada = 0;
 
 //Miramos a ver quien es el que saca primero
@@ -74,6 +80,26 @@ if (turno === 1) {
     turnoIA();
 }
 
+//Dificultad seleccionada
+let dificultad = 0;
+
+//###### Controlador botones ########
+btnFacil.onclick = function () {
+    dificultad = 0;
+    console.log('Se ha cambiado la dificultad a fácil');
+}
+
+btnMedia.onclick = function () {
+    dificultad = 1;
+    console.log('Se ha cambiado la dificultad a media');
+}
+
+btnDificil.onclick = function () {
+    dificultad = 2;
+    console.log('Se ha cambiado la dificultad a dificil');
+}
+
+//Celdas
 btnPos1.getBtn().onclick = function () {
     if (!partidaTerminada) {
         dibujarCruz(btnPos1);
