@@ -1,10 +1,6 @@
 //Tiempo minimo que la IA espera para la tirada
 const TIMEPO_MINIMO_ESPERA_IA = 500;
 
-//Contador para saber las celtas ocupadas
-let celdasLlenas = 0;
-let arrCeldas = [];
-
 class Boton {
     constructor(btn) {
         this.btn = btn;
@@ -39,10 +35,24 @@ let turno = Math.round(Math.random() * 1 + 1);
 //1 jugador
 //2 IA
 
+//Contador para saber las celtas ocupadas
+let celdasLlenas = 0;
+let arrCeldasDisponibles = [
+    btnPos1,
+    btnPos2,
+    btnPos3,
+    btnPos4,
+    btnPos5,
+    btnPos6,
+    btnPos7,
+    btnPos8,
+    btnPos9
+];
+
 if (turno === 1) {
-    console.log('Turno del Jugador');
+    console.log('--- Turno del Jugador ---');
 } else {
-    console.log('Turno de la IA');
+    console.log('--- Turno de la IA ---');
     turnoIA();
 }
 
@@ -89,9 +99,10 @@ function dibujarCruz(pos) {
             element.setAttribute('class', 'fas fa-times fa-4x');
             pos.getBtn().appendChild(element);
             pos.setPressed(true);
+            setCeldaSelected();
             turno = 2;
             celdasLlenas++;
-            console.log('Turno de la IA');
+            console.log('--- Turno de la IA ---');
             turnoIA();
         }
     } else {
@@ -101,16 +112,12 @@ function dibujarCruz(pos) {
 
 //######################   I.A. ###################\\
 
-function sleep(milsec) {
-    return new Promise(resolve => setTimeout(resolve, milsec));
-}
-
 async function turnoIA() {
-    console.log('Me toca');
 
     let milsec = Math.random() * 1000 + TIMEPO_MINIMO_ESPERA_IA;
     await sleep(milsec);
-    dibujarCirculo(btnPos1);
+    let tiro = Math.round(Math.random() * (arrCeldasDisponibles.length - 1));
+    dibujarCirculo(arrCeldasDisponibles[tiro]);
 }
 
 function dibujarCirculo(pos) {
@@ -120,11 +127,27 @@ function dibujarCirculo(pos) {
             element.setAttribute('class', 'fas fa-circle fa-4x');
             pos.getBtn().appendChild(element);
             pos.setPressed(true);
+            setCeldaSelected(pos.getBtn());
             turno = 1;
             celdasLlenas++;
-            console.log('Turno del Jugador');
+            console.log('--- Turno del Jugador ---');
         }
     } else {
         console.log('El boton seleccionado ya esta presionado');
+    }
+}
+
+//###############   Funciones generales   ###############\\
+function sleep(milsec) {
+    return new Promise(resolve => setTimeout(resolve, milsec));
+}
+
+function setCeldaSelected() {
+    for (let index in arrCeldasDisponibles) {
+        if (arrCeldasDisponibles[index].isPressed()) {
+            arrCeldasDisponibles.splice(index, 1);
+            console.log('Tirada la ficha en la celda ' + (parseInt(index) + 1));
+            break;
+        }
     }
 }
