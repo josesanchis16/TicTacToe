@@ -32,6 +32,7 @@ class Boton {
         return this.pressed;
     }
 }
+const board = document.getElementById('board');
 
 const btnPos1 = new Boton(document.getElementById('pos1'), 1);
 const btnPos2 = new Boton(document.getElementById('pos2'), 2);
@@ -49,6 +50,8 @@ const btnFacil = document.getElementById('btnFacil');
 const btnMedia = document.getElementById('btnMedia');
 const btnDificil = document.getElementById('btnDificil');
 
+const btnReiniciar = document.getElementById('btnRestart');
+
 //######### Variables ############
 let partidaTerminada = 0;
 
@@ -59,7 +62,8 @@ let turno = Math.round(Math.random() * 1 + 1);
 
 //Contador para saber las celtas ocupadas
 let celdasLlenas = 0;
-let arrCeldasDisponibles = [
+
+let AllCells = [
     btnPos1,
     btnPos2,
     btnPos3,
@@ -71,14 +75,9 @@ let arrCeldasDisponibles = [
     btnPos9
 ];
 
-if (turno === 1) {
-    console.log('--- Turno del Jugador ---');
-    turnoText.innerText = "Turno del Jugador";
-} else {
-    console.log('--- Turno de la IA ---');
-    turnoText.innerText = "Turno de la IA";
-    turnoIA();
-}
+let arrCeldasDisponibles = AllCells;
+
+whoShot();
 
 //Dificultad seleccionada
 let dificultad = 0;
@@ -106,6 +105,13 @@ btnDificil.onclick = function () {
     btnMedia.classList.remove('difuciltadIsSelected');
     btnDificil.classList.add('difuciltadIsSelected');
     console.log('Se ha cambiado la dificultad a dificil');
+}
+
+btnReiniciar.onclick = function () {
+    resetTurno();
+    clearBoard();
+    arrCeldasDisponibles = AllCells;
+    whoShot();
 }
 
 //Celdas
@@ -197,8 +203,7 @@ function dibujarCruz(pos) {
 async function turnoIA() {
     let milsec = Math.random() * 1000 + TIMEPO_MINIMO_ESPERA_IA;
     await sleep(milsec);
-    let tiro = Math.round(Math.random() * (arrCeldasDisponibles.length - 1));
-    dibujarCirculo(arrCeldasDisponibles[tiro]);
+    dibujarCirculo(tiroRandom());
 }
 
 function dibujarCirculo(pos) {
@@ -229,7 +234,85 @@ function dibujarCirculo(pos) {
     }
 }
 
+function tiroIA() {
+    if (btnPos1.isPressed()) {
+        let whoBtn1 = btnPos1.whoPressed();
+        if (whoBtn1 === 1) {
+            if ((btnPos2 !== undefined) && (btnPos3 !== undefined)) {
+                if (whoBtn1 === btnPos2.whoPressed()) {
+                    if (!btnPos3.isPressed()) {
+                        //Tiro celda fila superior derecha
+                        return btnPos3;
+                    } else {
+                        return tiroRandom();
+                    }
+                    //Comprobación fila superior derecha
+                } else if (whoBtn1 === btnPos3.whoPressed()) {
+                    if (!btnPos2.isPressed()) {
+                        return btnPos2;
+                    } else {
+                        return tiroRandom();
+                    }
+                }
+            } else {
+                return tiroRandom();
+            }
+        }
+    } else {
+        return tiroRandom();
+    }
+}
+
+function tiroRandom() {
+    let tiro = Math.round(Math.random() * (arrCeldasDisponibles.length - 1));
+    return arrCeldasDisponibles[tiro];
+}
+
 //###############   Funciones generales   ###############\\
+function whoShot() {
+    if (turno === 1) {
+        console.log('--- Turno del Jugador ---');
+        turnoText.innerText = "Turno del Jugador";
+    } else {
+        console.log('--- Turno de la IA ---');
+        turnoText.innerText = "Turno de la IA";
+        turnoIA();
+    }
+}
+
+function resetTurno() {
+    turno = Math.round(Math.random() * 1 + 1);
+    console.log(turno);
+    if (turno === 2) {
+        turnoIA();
+    }
+}
+
+function clearBoard() {
+    if (btnPos1.getBtn().firstChild) btnPos1.getBtn().removeChild(btnPos1.getBtn().firstChild);
+    if (btnPos2.getBtn().firstChild) btnPos2.getBtn().removeChild(btnPos2.getBtn().firstChild);
+    if (btnPos3.getBtn().firstChild) btnPos3.getBtn().removeChild(btnPos3.getBtn().firstChild);
+    if (btnPos4.getBtn().firstChild) btnPos4.getBtn().removeChild(btnPos4.getBtn().firstChild);
+    if (btnPos5.getBtn().firstChild) btnPos5.getBtn().removeChild(btnPos5.getBtn().firstChild);
+    if (btnPos6.getBtn().firstChild) btnPos6.getBtn().removeChild(btnPos6.getBtn().firstChild);
+    if (btnPos7.getBtn().firstChild) btnPos7.getBtn().removeChild(btnPos7.getBtn().firstChild);
+    if (btnPos8.getBtn().firstChild) btnPos8.getBtn().removeChild(btnPos8.getBtn().firstChild);
+    if (btnPos9.getBtn().firstChild) btnPos9.getBtn().removeChild(btnPos9.getBtn().firstChild);
+    clearButtonsObj();
+}
+
+function clearButtonsObj() {
+    btnPos1.setPressed(false);
+    btnPos2.setPressed(false);
+    btnPos3.setPressed(false);
+    btnPos4.setPressed(false);
+    btnPos5.setPressed(false);
+    btnPos6.setPressed(false);
+    btnPos7.setPressed(false);
+    btnPos8.setPressed(false);
+    btnPos9.setPressed(false);
+}
+
 function sleep(milsec) {
     return new Promise(resolve => setTimeout(resolve, milsec));
 }
