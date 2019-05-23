@@ -308,64 +308,28 @@ function clearButtonsObj() {
     btnPos7 = undefined;
     btnPos8 = undefined;
     btnPos9 = undefined;
-    // delete btnPos1.pos;
-    // delete btnPos1.pressed;
-    // delete btnPos1.who;
-
-    // delete btnPos2.pos;
-    // delete btnPos2.pressed;
-    // delete btnPos2.who;
-
-    // delete btnPos3.pos;
-    // delete btnPos3.pressed;
-    // delete btnPos3.who;
-
-    // delete btnPos4.pos;
-    // delete btnPos4.pressed;
-    // delete btnPos4.who;
-
-    // delete btnPos5.pos;
-    // delete btnPos5.pressed;
-    // delete btnPos5.who;
-
-    // delete btnPos6.pos;
-    // delete btnPos6.pressed;
-    // delete btnPos6.who;
-
-    // delete btnPos7.pos;
-    // delete btnPos7.pressed;
-    // delete btnPos7.who;
-
-    // delete btnPos8.pos;
-    // delete btnPos8.pressed;
-    // delete btnPos8.who;
-
-    // delete btnPos9.pos;
-    // delete btnPos9.pressed;
-    // delete btnPos9.who;
-
     crearBotones();
 }
 
 function crearBotones() {
-    arrCeldasDisponibles = [];
     btnPos1 = new Boton(document.getElementById('pos1'), 1);
-    arrCeldasDisponibles.push(btnPos1);
     btnPos2 = new Boton(document.getElementById('pos2'), 2);
-    arrCeldasDisponibles.push(btnPos2);
     btnPos3 = new Boton(document.getElementById('pos3'), 3);
-    arrCeldasDisponibles.push(btnPos3);
     btnPos4 = new Boton(document.getElementById('pos4'), 4);
-    arrCeldasDisponibles.push(btnPos4);
     btnPos5 = new Boton(document.getElementById('pos5'), 5);
-    arrCeldasDisponibles.push(btnPos5);
     btnPos6 = new Boton(document.getElementById('pos6'), 6);
-    arrCeldasDisponibles.push(btnPos6);
     btnPos7 = new Boton(document.getElementById('pos7'), 7);
-    arrCeldasDisponibles.push(btnPos7);
     btnPos8 = new Boton(document.getElementById('pos8'), 8);
-    arrCeldasDisponibles.push(btnPos8);
     btnPos9 = new Boton(document.getElementById('pos9'), 9);
+    arrCeldasDisponibles = [];
+    arrCeldasDisponibles.push(btnPos1);
+    arrCeldasDisponibles.push(btnPos2);
+    arrCeldasDisponibles.push(btnPos3);
+    arrCeldasDisponibles.push(btnPos4);
+    arrCeldasDisponibles.push(btnPos5);
+    arrCeldasDisponibles.push(btnPos6);
+    arrCeldasDisponibles.push(btnPos7);
+    arrCeldasDisponibles.push(btnPos8);
     arrCeldasDisponibles.push(btnPos9);
 }
 
@@ -440,5 +404,93 @@ function finPartida() {
         }
     }
 
+    if (finalWho === 0) {
+        let empate = controlarEmpate();
+        if (empate === true) finalWho = 3;
+    }
+
     return finalWho;
+}
+
+function controlarEmpate() {
+    let fichasTiradas = 0;
+    let empate = false;
+    if (arrCeldasDisponibles.length === 0) {
+        //Opciones empate desde la primera celda
+        if (btnPos1.isPressed()) {
+            let whoBtn1 = btnPos1.whoPressed();
+
+            //Comprobación fila superior
+            if (whoBtn1 !== btnPos2.whoPressed()) {
+                empate = true;
+            } else if (btnPos2.whoPressed() !== btnPos3.whoPressed()) {
+                empate = true;
+            } else empate = false;
+
+            //Comprobación columna izquierda
+            if ((whoBtn1 !== btnPos4.whoPressed())) {
+                empate = true;
+            } else if (btnPos4.whoPressed() !== btnPos7.whoPressed()) {
+                empate = true;
+            } else empate = false;
+
+            //Comprobación diagonal izquierda-derecha
+            if ((whoBtn1 !== btnPos5.whoPressed())) {
+                empate = true;
+            } else if (btnPos5.whoPressed() !== btnPos9.whoPressed()) {
+                empate = true;
+            } else empate = false;
+        }
+
+        //Opciones ganadoras desde la segunda celda
+        if (btnPos2.isPressed()) {
+            let whoBtn2 = btnPos2.whoPressed();
+            if (whoBtn2 !== btnPos5.whoPressed()) {
+                //Comprobación columna central
+                empate = true;
+            } else if (btnPos5.whoPressed() !== btnPos8.whoPressed()) {
+                empate = true;
+            } else empate = false;
+        }
+
+        //Opciones ganadoras desde la tercera celda
+        if (btnPos3.isPressed()) {
+            let whoBtn3 = btnPos3.whoPressed();
+            //Comprobación columna derecha
+            if (whoBtn3 !== btnPos6.whoPressed()) {
+                empate = true;
+            } else if (btnPos6.whoPressed() !== btnPos9.whoPressed()) {
+                empate = true;
+            } else empate = false;
+
+            //Comprobación diagonal derecha-izquierda
+            if (whoBtn3 !== btnPos5.whoPressed()) {
+                empate = true;
+            } else if (btnPos5.whoPressed() !== btnPos7.whoPressed()) {
+                empate = true;
+            } else empate = false;
+        }
+
+        //Opciones ganadoras desde la cuarta celda
+        if (btnPos4.isPressed()) {
+            let whoBtn4 = btnPos4.whoPressed();
+            if (whoBtn4 !== btnPos5.whoPressed()) {
+                empate = true;
+            } else if (btnPos5.whoPressed() !== btnPos6.whoPressed()) {
+                empate = true;
+            } else empate = false;
+        }
+
+        //Opciones ganadoras desde la séptima celda
+        if (btnPos7.isPressed()) {
+            let whoBtn7 = btnPos7.whoPressed();
+            if (whoBtn7 !== btnPos8.whoPressed()) {
+                empate = true;
+            } else if (btnPos8.whoPressed() !== btnPos9.whoPressed()) {
+                empate = true;
+            } else empate = false;
+        }
+    }
+
+    return empate;
 }
