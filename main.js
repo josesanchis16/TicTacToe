@@ -34,15 +34,15 @@ class Boton {
 }
 const board = document.getElementById('board');
 
-const btnPos1 = new Boton(document.getElementById('pos1'), 1);
-const btnPos2 = new Boton(document.getElementById('pos2'), 2);
-const btnPos3 = new Boton(document.getElementById('pos3'), 3);
-const btnPos4 = new Boton(document.getElementById('pos4'), 4);
-const btnPos5 = new Boton(document.getElementById('pos5'), 5);
-const btnPos6 = new Boton(document.getElementById('pos6'), 6);
-const btnPos7 = new Boton(document.getElementById('pos7'), 7);
-const btnPos8 = new Boton(document.getElementById('pos8'), 8);
-const btnPos9 = new Boton(document.getElementById('pos9'), 9);
+let btnPos1;
+let btnPos2;
+let btnPos3;
+let btnPos4;
+let btnPos5;
+let btnPos6;
+let btnPos7;
+let btnPos8;
+let btnPos9;
 
 const turnoText = document.getElementById('turnoText');
 
@@ -63,7 +63,7 @@ let turno = Math.round(Math.random() * 1 + 1);
 //Contador para saber las celtas ocupadas
 let celdasLlenas = 0;
 
-let AllCells = [
+let arrCeldasDisponibles = [
     btnPos1,
     btnPos2,
     btnPos3,
@@ -74,8 +74,7 @@ let AllCells = [
     btnPos8,
     btnPos9
 ];
-
-let arrCeldasDisponibles = AllCells;
+crearBotones();
 
 whoShot();
 
@@ -108,10 +107,9 @@ btnDificil.onclick = function () {
 }
 
 btnReiniciar.onclick = function () {
-    resetTurno();
     clearBoard();
-    arrCeldasDisponibles = AllCells;
-    whoShot();
+    resetTurno();
+    partidaTerminada = 0;
 }
 
 //Celdas
@@ -234,34 +232,34 @@ function dibujarCirculo(pos) {
     }
 }
 
-function tiroIA() {
-    if (btnPos1.isPressed()) {
-        let whoBtn1 = btnPos1.whoPressed();
-        if (whoBtn1 === 1) {
-            if ((btnPos2 !== undefined) && (btnPos3 !== undefined)) {
-                if (whoBtn1 === btnPos2.whoPressed()) {
-                    if (!btnPos3.isPressed()) {
-                        //Tiro celda fila superior derecha
-                        return btnPos3;
-                    } else {
-                        return tiroRandom();
-                    }
-                    //Comprobación fila superior derecha
-                } else if (whoBtn1 === btnPos3.whoPressed()) {
-                    if (!btnPos2.isPressed()) {
-                        return btnPos2;
-                    } else {
-                        return tiroRandom();
-                    }
-                }
-            } else {
-                return tiroRandom();
-            }
-        }
-    } else {
-        return tiroRandom();
-    }
-}
+// function tiroIA() {
+//     if (btnPos1.isPressed()) {
+//         let whoBtn1 = btnPos1.whoPressed();
+//         if (whoBtn1 === 1) {
+//             if ((btnPos2 !== undefined) && (btnPos3 !== undefined)) {
+//                 if (whoBtn1 === btnPos2.whoPressed()) {
+//                     if (!btnPos3.isPressed()) {
+//                         //Tiro celda fila superior derecha
+//                         return btnPos3;
+//                     } else {
+//                         return tiroRandom();
+//                     }
+//                     //Comprobación fila superior derecha
+//                 } else if (whoBtn1 === btnPos3.whoPressed()) {
+//                     if (!btnPos2.isPressed()) {
+//                         return btnPos2;
+//                     } else {
+//                         return tiroRandom();
+//                     }
+//                 }
+//             } else {
+//                 return tiroRandom();
+//             }
+//         }
+//     } else {
+//         return tiroRandom();
+//     }
+// }
 
 function tiroRandom() {
     let tiro = Math.round(Math.random() * (arrCeldasDisponibles.length - 1));
@@ -269,6 +267,7 @@ function tiroRandom() {
 }
 
 //###############   Funciones generales   ###############\\
+
 function whoShot() {
     if (turno === 1) {
         console.log('--- Turno del Jugador ---');
@@ -283,9 +282,7 @@ function whoShot() {
 function resetTurno() {
     turno = Math.round(Math.random() * 1 + 1);
     console.log(turno);
-    if (turno === 2) {
-        turnoIA();
-    }
+    whoShot();
 }
 
 function clearBoard() {
@@ -302,15 +299,74 @@ function clearBoard() {
 }
 
 function clearButtonsObj() {
-    btnPos1.setPressed(false);
-    btnPos2.setPressed(false);
-    btnPos3.setPressed(false);
-    btnPos4.setPressed(false);
-    btnPos5.setPressed(false);
-    btnPos6.setPressed(false);
-    btnPos7.setPressed(false);
-    btnPos8.setPressed(false);
-    btnPos9.setPressed(false);
+    btnPos1 = undefined;
+    btnPos2 = undefined;
+    btnPos3 = undefined;
+    btnPos4 = undefined;
+    btnPos5 = undefined;
+    btnPos6 = undefined;
+    btnPos7 = undefined;
+    btnPos8 = undefined;
+    btnPos9 = undefined;
+    // delete btnPos1.pos;
+    // delete btnPos1.pressed;
+    // delete btnPos1.who;
+
+    // delete btnPos2.pos;
+    // delete btnPos2.pressed;
+    // delete btnPos2.who;
+
+    // delete btnPos3.pos;
+    // delete btnPos3.pressed;
+    // delete btnPos3.who;
+
+    // delete btnPos4.pos;
+    // delete btnPos4.pressed;
+    // delete btnPos4.who;
+
+    // delete btnPos5.pos;
+    // delete btnPos5.pressed;
+    // delete btnPos5.who;
+
+    // delete btnPos6.pos;
+    // delete btnPos6.pressed;
+    // delete btnPos6.who;
+
+    // delete btnPos7.pos;
+    // delete btnPos7.pressed;
+    // delete btnPos7.who;
+
+    // delete btnPos8.pos;
+    // delete btnPos8.pressed;
+    // delete btnPos8.who;
+
+    // delete btnPos9.pos;
+    // delete btnPos9.pressed;
+    // delete btnPos9.who;
+
+    crearBotones();
+}
+
+function crearBotones() {
+    arrCeldasDisponibles = [];
+    btnPos1 = new Boton(document.getElementById('pos1'), 1);
+    arrCeldasDisponibles.push(btnPos1);
+    btnPos2 = new Boton(document.getElementById('pos2'), 2);
+    arrCeldasDisponibles.push(btnPos2);
+    btnPos3 = new Boton(document.getElementById('pos3'), 3);
+    arrCeldasDisponibles.push(btnPos3);
+    btnPos4 = new Boton(document.getElementById('pos4'), 4);
+    arrCeldasDisponibles.push(btnPos4);
+    btnPos5 = new Boton(document.getElementById('pos5'), 5);
+    arrCeldasDisponibles.push(btnPos5);
+    btnPos6 = new Boton(document.getElementById('pos6'), 6);
+    arrCeldasDisponibles.push(btnPos6);
+    btnPos7 = new Boton(document.getElementById('pos7'), 7);
+    arrCeldasDisponibles.push(btnPos7);
+    btnPos8 = new Boton(document.getElementById('pos8'), 8);
+    arrCeldasDisponibles.push(btnPos8);
+    btnPos9 = new Boton(document.getElementById('pos9'), 9);
+    arrCeldasDisponibles.push(btnPos9);
 }
 
 function sleep(milsec) {
