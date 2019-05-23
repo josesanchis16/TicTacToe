@@ -321,6 +321,7 @@ function crearBotones() {
     btnPos7 = new Boton(document.getElementById('pos7'), 7);
     btnPos8 = new Boton(document.getElementById('pos8'), 8);
     btnPos9 = new Boton(document.getElementById('pos9'), 9);
+
     arrCeldasDisponibles = [];
     arrCeldasDisponibles.push(btnPos1);
     arrCeldasDisponibles.push(btnPos2);
