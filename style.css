@@ -159,7 +159,6 @@ footer {
         position: unset;
     }
     section>div:not(#divBoard):first-child {
-        background: red;
         position: absolute;
         top: 15px;
         left: 10px;
