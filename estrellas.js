@@ -63,3 +63,7 @@ estrella5.onmouseleave = function () {
     estrella4.classList.remove('selectedStar');
     estrella5.classList.remove('selectedStar');
 }
+
+estrella5.onclick = function () {
+    
+}

@@ -54,7 +54,7 @@ section>div:not(#divBoard):first-child {
     justify-content: center;
     align-items: center;
     display: flex;
-    top: 50%;
+    top: 45%;
     left: -50px;
     z-index: 1;
     transition: 0.5s;
@@ -151,11 +151,39 @@ footer {
     color: gold;
 }
 
+#resumen {
+    margin-top: 15px;
+    padding: 10px;
+    border: 4px solid #eee;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#tituloResumen {
+    position: relative;
+}
+
+#tituloResumen:after {
+    position: absolute;
+    content: "";
+    border-radius: 10px;
+    width: 100%;
+    height: 3px;
+    top: 25px;
+    left: 0;
+    background: #eee;
+}
+
+#resumen p:not(#tituloResumen) {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
 @media only screen and (max-width: 642px) {
     body {
         position: relative;
     }
-    section{
+    section {
         position: unset;
     }
     section>div:not(#divBoard):first-child {

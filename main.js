@@ -1,6 +1,9 @@
 //Tiempo minimo que la IA espera para la tirada
 const TIMEPO_MINIMO_ESPERA_IA = 500;
 
+let partidasGanadas = 0;
+let partidasPerdidas = 0;
+
 class Boton {
     constructor(btn, pos) {
         this.btn = btn;
@@ -47,6 +50,9 @@ let btnPos9;
 const turnoText = document.getElementById('turnoText');
 
 const btnReiniciar = document.getElementById('btnRestart');
+
+const partidasGanadasText = document.getElementById('partidasGanadas');
+const partidasPerdidasText = document.getElementById('partidasPerdidas');
 
 //######### Variables ############
 let partidaTerminada = 0;
@@ -135,7 +141,7 @@ btnPos9.getBtn().onclick = function () {
     }
 }
 
-function dibujarCruz(pos) {
+async function dibujarCruz(pos) {
     if (!pos.isPressed()) {
         if (turno === 1) {
             let element = document.createElement('i');
@@ -155,8 +161,11 @@ function dibujarCruz(pos) {
                 turnoText.innerText = "Empate";
             } else {
                 partidaTerminada = 1;
+                partidasGanadas++;
                 console.log('Ganaste la partida');
                 turnoText.innerText = "Ganaste la partida";
+                await sleep(1000);
+                partidasGanadasText.innerText = partidasGanadas;
             }
         }
     } else {
@@ -172,7 +181,7 @@ async function turnoIA() {
     dibujarCirculo(tiroIA());
 }
 
-function dibujarCirculo(pos) {
+async function dibujarCirculo(pos) {
     if (!pos.isPressed()) {
         if (turno === 2) {
             let element = document.createElement('i');
@@ -183,7 +192,6 @@ function dibujarCirculo(pos) {
             setCeldaSelected(pos.getBtn());
             celdasLlenas++;
             if (finPartida() === 0) {
-                turno = 1;
                 turnoText.innerText = "Turno del jugador";
                 console.log('--- Turno del Jugador ---');
             } else if (finPartida() === 3) {
@@ -191,8 +199,11 @@ function dibujarCirculo(pos) {
                 turnoText.innerText = "Empate";
             } else {
                 partidaTerminada = 1;
+                partidasPerdidas++;
                 console.log('Perdiste la partida, gana la IA');
                 turnoText.innerText = "Perdiste la partida";
+                await sleep(1000);
+                partidasPerdidasText.innerText = partidasPerdidas;
             }
         }
     } else {
