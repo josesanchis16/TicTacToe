@@ -34,9 +34,10 @@ section {
     justify-content: center;
     align-items: center;
     display: flex;
+    position: relative;
 }
 
-section > div:not(#divBoard){
+section>div:not(#divBoard) {
     padding: 10px;
     background: #233142;
     justify-content: center;
@@ -46,9 +47,17 @@ section > div:not(#divBoard){
     border-radius: 5px;
 }
 
-section > div:not(#divBoard):first-child{
+section>div:not(#divBoard):first-child {
     border-radius: 50%;
     padding: 15px;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    top: 50%;
+    left: -50px;
+    z-index: 1;
+    transition: 0.5s;
 }
 
 section>div:nth-child(2) {
@@ -94,7 +103,7 @@ section #divBoard {
 }
 
 #board div:hover {
-    background: #172635;
+    background: #141f2b;
     transition: 0.2s;
 }
 
@@ -103,54 +112,6 @@ section #divBoard {
     align-items: center;
     display: flex;
     height: 100%;
-}
-
-section >div:nth-child(3){
-    flex-direction: column;
-    font-size: 1.2em;
-}
-
-#tituloDificultad{
-    position: relative;
-}
-
-#tituloDificultad::after{
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    top: 20px;
-    left: 0;
-    background: #eee;
-}
-
-#btnFacil {
-    margin-top: 10px;
-}
-
-section > div:nth-child(3) p:not(#tituloDificultad){
-    padding: 3px 0;
-    position: relative;
-}
-
-section > div:nth-child(3) p:not(#tituloDificultad):hover::after{
-    position: absolute;
-    content: "";
-    top: 13px;
-    left: -20px;
-    width: 10px;
-    height: 3px;
-    background: #eee;
-}
-
-.difuciltadIsSelected::after{
-    position: absolute;
-    content: "";
-    top: 13px;
-    left: -20px;
-    width: 10px;
-    height: 3px;
-    background: #eee;
 }
 
 footer {
@@ -188,4 +149,21 @@ footer {
 
 .selectedStar {
     color: gold;
+}
+
+@media only screen and (max-width: 642px) {
+    body {
+        position: relative;
+    }
+    section{
+        position: unset;
+    }
+    section>div:not(#divBoard):first-child {
+        background: red;
+        position: absolute;
+        top: 15px;
+        left: 10px;
+        padding: 5px;
+        transition: 0.5s;
+    }
 }

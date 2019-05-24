@@ -46,10 +46,6 @@ let btnPos9;
 
 const turnoText = document.getElementById('turnoText');
 
-const btnFacil = document.getElementById('btnFacil');
-const btnMedia = document.getElementById('btnMedia');
-const btnDificil = document.getElementById('btnDificil');
-
 const btnReiniciar = document.getElementById('btnRestart');
 
 //######### Variables ############
@@ -77,34 +73,6 @@ let arrCeldasDisponibles = [
 crearBotones();
 
 whoShot();
-
-//Dificultad seleccionada
-let dificultad = 1;
-
-//###### Controlador botones ########
-btnFacil.onclick = function () {
-    dificultad = 1;
-    btnFacil.classList.add('difuciltadIsSelected');
-    btnMedia.classList.remove('difuciltadIsSelected');
-    btnDificil.classList.remove('difuciltadIsSelected');
-    console.log('Se ha cambiado la dificultad a fácil');
-}
-
-btnMedia.onclick = function () {
-    dificultad = 2;
-    btnFacil.classList.remove('difuciltadIsSelected');
-    btnMedia.classList.add('difuciltadIsSelected');
-    btnDificil.classList.remove('difuciltadIsSelected');
-    console.log('Se ha cambiado la dificultad a media');
-}
-
-btnDificil.onclick = function () {
-    dificultad = 3;
-    btnFacil.classList.remove('difuciltadIsSelected');
-    btnMedia.classList.remove('difuciltadIsSelected');
-    btnDificil.classList.add('difuciltadIsSelected');
-    console.log('Se ha cambiado la dificultad a dificil');
-}
 
 btnReiniciar.onclick = function () {
     clearBoard();
