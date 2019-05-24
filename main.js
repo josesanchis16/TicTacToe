@@ -192,6 +192,7 @@ async function dibujarCirculo(pos) {
             setCeldaSelected(pos.getBtn());
             celdasLlenas++;
             if (finPartida() === 0) {
+                turno = 1;
                 turnoText.innerText = "Turno del jugador";
                 console.log('--- Turno del Jugador ---');
             } else if (finPartida() === 3) {
