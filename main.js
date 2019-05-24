@@ -209,12 +209,12 @@ function tiroRandom() {
 export function tiroIA() {
 
     let res;
-    res = defensaIA(1);
+    res = ataqueIA(2);
 
 
     if (typeof res === 'number') {
         console.log('No habia nada que defender, me toca atacar');
-        res = ataqueIA(2);
+        res = defensaIA(1);
         if (typeof res === 'number') {
             console.log('No puedo atacar, tiro donde sea');
             return tiroRandom();
@@ -275,7 +275,7 @@ export function tiroIA() {
             if (!btnPos1.isPressed()) {
                 //Controlamos que en la 1ra celda no haya ficha ya
                 for (let pos of arrCeldasDisponibles) {
-                    if (pos.pos === player) {
+                    if (pos.pos === 1) {
                         console.log('He evitado una jugada ganadora');
                         return pos;
                     }
@@ -458,7 +458,7 @@ export function tiroIA() {
             if (!btnPos1.isPressed()) {
                 //Controlamos que en la 1ra celda no haya ficha ya
                 for (let pos of arrCeldasDisponibles) {
-                    if (pos.pos === player) {
+                    if (pos.pos === 1) {
                         console.log('He evitado una jugada ganadora');
                         return pos;
                     }
@@ -641,7 +641,7 @@ export function tiroIA() {
             if (!btnPos1.isPressed()) {
                 //Controlamos que en la 9ra celda no haya ficha ya
                 for (let pos of arrCeldasDisponibles) {
-                    if (pos.pos === player) {
+                    if (pos.pos === 1) {
                         console.log('He evitado una jugada ganadora');
                         return pos;
                     }
@@ -767,7 +767,7 @@ export function tiroIA() {
             if (!btnPos1.isPressed()) {
                 //Controlamos que en la 1ra celda no haya ficha ya
                 for (let pos of arrCeldasDisponibles) {
-                    if (pos.pos === ia) {
+                    if (pos.pos === 1) {
                         console.log('He evitado una jugada ganadora');
                         return pos;
                     }
@@ -950,7 +950,7 @@ export function tiroIA() {
             if (!btnPos1.isPressed()) {
                 //Controlamos que en la 1ra celda no haya ficha ya
                 for (let pos of arrCeldasDisponibles) {
-                    if (pos.pos === ia) {
+                    if (pos.pos === 1) {
                         console.log('He evitado una jugada ganadora');
                         return pos;
                     }
@@ -1133,7 +1133,7 @@ export function tiroIA() {
             if (!btnPos1.isPressed()) {
                 //Controlamos que en la 9ra celda no haya ficha ya
                 for (let pos of arrCeldasDisponibles) {
-                    if (pos.pos === ia) {
+                    if (pos.pos === 1) {
                         console.log('He evitado una jugada ganadora');
                         return pos;
                     }
