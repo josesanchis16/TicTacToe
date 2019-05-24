@@ -82,7 +82,7 @@ whoShot();
 
 btnReiniciar.onclick = function () {
     let ataque = ataqueIA(2);
-    if (ataque !== 'number') {
+    if (typeof ataque !== 'number') {
         dibujarCirculoReinicio(ataque);
     }
     clearBoard();
