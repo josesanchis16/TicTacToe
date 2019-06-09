@@ -81,9 +81,11 @@ crearBotones();
 whoShot();
 
 btnReiniciar.onclick = function () {
-    let ataque = ataqueIA(2);
-    if (typeof ataque !== 'number') {
-        dibujarCirculoReinicio(ataque);
+    if (partidaTerminada === 0) {
+        let ataque = ataqueIA(2);
+        if (typeof ataque !== 'number') {
+            dibujarCirculoReinicio(ataque);
+        }
     }
     clearBoard();
     resetTurno();
